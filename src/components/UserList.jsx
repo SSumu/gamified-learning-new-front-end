@@ -14,7 +14,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const UserList = ({ users, refresh, onSelect }) => {
   const deleteUser = async (id) => {
-    await fetch(`http://localhost:5000/api/users/${id}`, {
+    await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users/${id}`, {
       method: "DELETE",
     });
     refresh();

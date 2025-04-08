@@ -9,7 +9,7 @@ const Dashboard = () => {
   const [selectedUser, setSelectedUser] = useState(null);
 
   const fetchUsers = async () => {
-    const res = await fetch("http://localhost:5000/api/users");
+    const res = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users`);
     const data = await res.json();
     setUsers(data);
   };
