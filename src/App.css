@@ -28,6 +28,8 @@
   color: #61dafb;
 }
 
+
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +37,85 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Global styles */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f7fa;
+  margin: 0;
+}
+
+.dashboard-container {
+  padding: 0 24px;
+}
+
+.dashboard-title {
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.stats-section {
+  margin-bottom: 40px;
+}
+
+.card-container {
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.card-container:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Styling for stats cards */
+.MuiCard-root {
+  border-radius: 12px;
+  box-shadow: none;
+}
+
+.MuiCardContent-root {
+  padding: 16px;
+}
+
+.MuiAvatar-root {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Activities and Progress sections */
+.activities-progress {
+  margin-top: 40px;
+}
+
+.MuiTypography-h6 {
+  font-weight: 700;
+  color: #333;
+}
+
+.MuiLinearProgress-root {
+  border-radius: 5px;
+  background-color: #e4e7eb;
+}
+
+.MuiLinearProgress-bar {
+  background-color: #1976d2;
+}
+
+.MuiListItem-root {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.MuiListItemAvatar-root {
+  min-width: 56px;
+}
+
+.MuiDivider-root {
+  margin-top: 8px;
+  margin-bottom: 8px;
 }

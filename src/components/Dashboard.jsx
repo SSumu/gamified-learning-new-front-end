@@ -25,7 +25,6 @@ import {
 } from "@mui/icons-material";
 
 const Dashboard = () => {
-  // Sample data - replace with real data from your API
   const stats = [
     {
       title: "Total Students",
@@ -100,141 +99,183 @@ const Dashboard = () => {
   ];
 
   return (
-    <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
-      <Typography
-        variant="h4"
-        component="h1"
-        gutterBottom
-        sx={{ fontWeight: "bold" }}
-      >
-        Dashboard Overview
-      </Typography>
+    <Container maxWidth="xl" sx={{ padding: 0 }}>
+      <div className="dashboard-container">
+        <Typography
+          variant="h4"
+          component="h1"
+          gutterBottom
+          className="dashboard-title"
+          sx={{ textAlign: "center", fontWeight: 700, margin: 4 }}
+        >
+          Dashboard Overview
+        </Typography>
 
-      {/* Stats Cards */}
-      <Grid container spacing={3} sx={{ mb: 4 }}>
-        {stats.map((stat, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-            <Card sx={{ height: "100%" }}>
-              <CardContent>
-                <Box
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                >
-                  <Box>
-                    <Typography variant="h6" color="text.secondary">
-                      {stat.title}
-                    </Typography>
-                    <Typography
-                      variant="h4"
-                      component="div"
-                      sx={{ fontWeight: "bold" }}
-                    >
-                      {stat.value}
-                    </Typography>
-                  </Box>
-                  <Avatar sx={{ bgcolor: stat.color, width: 56, height: 56 }}>
-                    {stat.icon}
-                  </Avatar>
-                </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* Recent Activities and Progress */}
-      <Grid container spacing={3}>
-        {/* Recent Activities */}
-        <Grid item xs={12} md={8}>
-          <Card>
-            <CardContent>
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
-                Recent Activities
-              </Typography>
-              <List>
-                {recentActivities.map((activity) => (
-                  <React.Fragment key={activity.id}>
-                    <ListItem alignItems="flex-start">
-                      <ListItemAvatar>
-                        <Avatar>{activity.icon}</Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={
-                          <Typography variant="body1" component="span">
-                            <strong>{activity.user}</strong> {activity.action}{" "}
-                            <strong>{activity.item}</strong>
+        {/* Stats Cards */}
+        <div className="stats-section" style={{ display: "flex", justifyContent: "center", marginBottom: 4 }}>
+          <Grid container spacing={3} justifyContent="center">
+            {stats.map((stat, index) => (
+              <Grid item xs={12} sm={6} md={3} key={index}>
+                <div className="card-container" style={{ marginBottom: "24px" }}>
+                  <Card sx={{ height: "100%" }}>
+                    <CardContent>
+                      <Box
+                        display="flex"
+                        justifyContent="space-between"
+                        alignItems="center"
+                      >
+                        <Box>
+                          <Typography
+                            variant="subtitle2"
+                            color="text.secondary"
+                            gutterBottom
+                          >
+                            {stat.title}
                           </Typography>
-                        }
-                        secondary={
-                          <Box display="flex" justifyContent="space-between">
-                            <Typography variant="body2" color="text.secondary">
-                              {activity.time}
-                            </Typography>
-                            <Typography
-                              variant="body2"
-                              color={
-                                activity.points > 0
-                                  ? "success.main"
-                                  : activity.points < 0
-                                  ? "error.main"
-                                  : "text.secondary"
-                              }
-                              sx={{ fontWeight: "bold" }}
-                            >
-                              {activity.points > 0
-                                ? `+${activity.points}`
-                                : activity.points}{" "}
-                              points
-                            </Typography>
-                          </Box>
-                        }
-                      />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                  </React.Fragment>
-                ))}
-              </List>
-            </CardContent>
-          </Card>
-        </Grid>
+                          <Typography
+                            variant="h4"
+                            component="div"
+                            sx={{ fontWeight: 700 }}
+                          >
+                            {stat.value}
+                          </Typography>
+                        </Box>
+                        <Avatar
+                          sx={{
+                            bgcolor: stat.color,
+                            width: 60,
+                            height: 60,
+                            boxShadow: 4,
+                          }}
+                        >
+                          {stat.icon}
+                        </Avatar>
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </div>
+              </Grid>
+            ))}
+          </Grid>
+        </div>
 
-        {/* Skill Progress */}
-        <Grid item xs={12} md={4}>
-          <Card sx={{ height: "100%" }}>
-            <CardContent>
-              <Typography variant="h6" gutterBottom sx={{ fontWeight: "bold" }}>
-                Community Skill Progress
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
-                <TrendingUpIcon color="primary" sx={{ mr: 1 }} />
-                <Typography variant="body1">
-                  Average completion rates
-                </Typography>
-              </Box>
-              {progressData.map((item, index) => (
-                <Box key={index} sx={{ mb: 2 }}>
-                  <Typography variant="body2" sx={{ mb: 1 }}>
-                    {item.skill}
-                  </Typography>
-                  <LinearProgress
-                    variant="determinate"
-                    value={item.progress}
-                    sx={{ height: 8, borderRadius: 4 }}
-                  />
-                  <Typography
-                    variant="body2"
-                    color="text.secondary"
-                    sx={{ mt: 1, textAlign: "right" }}
-                  >
-                    {item.progress}%
-                  </Typography>
-                </Box>
-              ))}
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
+        {/* Recent Activities and Progress */}
+        <div className="activities-progress" style={{ display: "flex", justifyContent: "center", marginBottom: 4 }}>
+          <Grid container spacing={3} justifyContent="center">
+            {/* Recent Activities */}
+            <Grid item xs={12} md={8}>
+              <div className="card-container" style={{ marginBottom: "24px" }}>
+                <Card>
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ fontWeight: "bold", textAlign: "center", marginBottom: 3 }}
+                    >
+                      Recent Activities
+                    </Typography>
+                    <List>
+                      {recentActivities.map((activity) => (
+                        <React.Fragment key={activity.id}>
+                          <ListItem alignItems="flex-start">
+                            <ListItemAvatar>
+                              <Avatar>{activity.icon}</Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                              primary={(
+                                <Typography variant="body1" component="span">
+                                  <strong>{activity.user}</strong> {activity.action}{" "}
+                                  <strong>{activity.item}</strong>
+                                </Typography>
+                              )}
+                              secondary={(
+                                <Box display="flex" justifyContent="space-between">
+                                  <Typography variant="body2" color="text.secondary">
+                                    {activity.time}
+                                  </Typography>
+                                  <Typography
+                                    variant="body2"
+                                    color={
+                                      activity.points > 0
+                                        ? "success.main"
+                                        : activity.points < 0
+                                        ? "error.main"
+                                        : "text.secondary"
+                                    }
+                                    sx={{ fontWeight: "bold" }}
+                                  >
+                                    {activity.points > 0
+                                      ? `+${activity.points}`
+                                      : activity.points}{" "}
+                                    points
+                                  </Typography>
+                                </Box>
+                              )}
+                            />
+                          </ListItem>
+                          <Divider variant="inset" component="li" />
+                        </React.Fragment>
+                      ))}
+                    </List>
+                  </CardContent>
+                </Card>
+              </div>
+            </Grid>
+
+            {/* Skill Progress */}
+            <Grid item xs={12} md={4}>
+              <div className="card-container" style={{ marginBottom: "24px" }}>
+                <Card sx={{ height: "100%" }}>
+                  <CardContent>
+                    <Typography
+                      variant="h6"
+                      gutterBottom
+                      sx={{ fontWeight: "bold", textAlign: "center", marginBottom: 3 }}
+                    >
+                      Community Skill Progress
+                    </Typography>
+                    <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+                      <TrendingUpIcon color="primary" sx={{ mr: 1 }} />
+                      <Typography variant="body1">
+                        Average completion rates
+                      </Typography>
+                    </Box>
+                    {progressData.map((item, index) => (
+                      <Box key={index} sx={{ mb: 2 }}>
+                        <Typography
+                          variant="subtitle2"
+                          sx={{ mb: 0.5, fontWeight: 500, color: "text.secondary" }}
+                        >
+                          {item.skill}
+                        </Typography>
+                        <LinearProgress
+                          variant="determinate"
+                          value={item.progress}
+                          sx={{
+                            height: 10,
+                            borderRadius: 5,
+                            "& .MuiLinearProgress-bar": {
+                              borderRadius: 5,
+                              backgroundColor: "#1976d2",
+                            },
+                          }}
+                        />
+                        <Typography
+                          variant="caption"
+                          color="text.secondary"
+                          sx={{ mt: 1, textAlign: "right", display: "block" }}
+                        >
+                          {item.progress}%
+                        </Typography>
+                      </Box>
+                    ))}
+                  </CardContent>
+                </Card>
+              </div>
+            </Grid>
+          </Grid>
+        </div>
+      </div>
     </Container>
   );
 };
