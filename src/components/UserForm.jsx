@@ -49,15 +49,21 @@ const UserForm = ({ refresh }) => {
 
   return (
     <Box>
-      <Typography variant="h6">Add User</Typography>
-      <TextField
-        fullWidth
-        label="Username"
-        name="username"
-        value={user.username}
-        onChange={handleChange}
-        margin="normal"
-      />
+      <Typography variant="h6" gutterBottom>
+        Add User
+      </Typography>
+
+      <Box sx={{ width: "300px" }}>
+        <TextField
+          fullWidth
+          label="Username"
+          name="username"
+          value={user.username}
+          onChange={handleChange}
+          margin="normal"
+        />
+      </Box>
+
       <FormControl fullWidth margin="normal">
         <InputLabel>Courses</InputLabel>
         <Select
@@ -76,9 +82,12 @@ const UserForm = ({ refresh }) => {
           ))}
         </Select>
       </FormControl>
-      <Button onClick={handleSubmit} variant="contained" fullWidth>
-        Submit
-      </Button>
+
+      <Box sx={{ width: "300px", mt: 2 }}>
+        <Button onClick={handleSubmit} variant="contained" fullWidth>
+          Submit
+        </Button>
+      </Box>
     </Box>
   );
 };
