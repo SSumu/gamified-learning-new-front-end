@@ -29,15 +29,14 @@ const UserForm = ({ refresh }) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if (name === "courses") {
-      const newCourses = value;
-      setUser((prev) => ({ ...prev, courses: newCourses }));
-    } else {
-      setUser((prev) => ({ ...prev, [name]: value }));
-    }
+    setUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -64,7 +63,7 @@ const UserForm = ({ refresh }) => {
         />
       </Box>
 
-      <FormControl fullWidth margin="normal">
+      <FormControl fullWidth margin="normal" sx={{ width: "300px" }}>
         <InputLabel>Courses</InputLabel>
         <Select
           multiple
@@ -72,14 +71,58 @@ const UserForm = ({ refresh }) => {
           value={user.courses}
           onChange={handleChange}
           input={<Input />}
-          renderValue={(selected) => selected.join(", ")}
+          renderValue={(selected) => (
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                gap: "4px",
+                maxHeight: "150px",
+                overflowY: "auto",
+              }}
+            >
+              {selected.map((course) => (
+                <Box
+                  key={course}
+                  sx={{
+                    bgcolor: "#e3f2fd", // Light blue background for selected courses
+                    color: "#1976d2", // Blue text color for course labels
+                    borderRadius: "16px",
+                    padding: "4px 8px",
+                    fontSize: "14px",
+                  }}
+                >
+                  {course}
+                </Box>
+              ))}
+            </Box>
+          )}
+          MenuProps={{
+            PaperProps: {
+              sx: {
+                minHeight: "150px", // Minimum height for the dropdown menu
+              },
+            },
+          }}
         >
-          {courses.map((course) => (
-            <MenuItem key={course} value={course}>
-              <Checkbox checked={user.courses.indexOf(course) > -1} />
-              <ListItemText primary={course} />
-            </MenuItem>
-          ))}
+          {courses.map((course) => {
+            const isSelected = user.courses.includes(course);
+            return (
+              <MenuItem
+                key={course}
+                value={course}
+                sx={{
+                  bgcolor: isSelected ? "#e3f2fd" : "inherit", // light blue background
+                  "&:hover": {
+                    bgcolor: isSelected ? "#bbdefb" : "#f5f5f5",
+                  },
+                }}
+              >
+                <Checkbox checked={isSelected} />
+                <ListItemText primary={course} />
+              </MenuItem>
+            );
+          })}
         </Select>
       </FormControl>
 

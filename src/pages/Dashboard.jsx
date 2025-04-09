@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container, Typography, Grid, Card, Box } from "@mui/material";
+import { Container, Typography, Grid, Card, Box, Avatar } from "@mui/material";
 import GroupIcon from "@mui/icons-material/Group";
+import PersonIcon from "@mui/icons-material/Person";
 import UserForm from "../components/UserForm";
 import UserList from "../components/UserList";
 import SkillProgress from "../components/SkillProgress";
@@ -19,13 +20,24 @@ const Dashboard = () => {
     fetchUsers();
   }, []);
 
+  const getSelectedUserChallengeCount = () => {
+    if (!selectedUser || !selectedUser.courses) return 0;
+    return selectedUser.courses.length;
+  };
+
   return (
     <Container>
-      <Typography variant="h4" my={2}>
-        Community Skill Dashboard
-      </Typography>
+      {/* Logo + Title */}
+      <Box sx={{ display: "flex", alignItems: "center", my: 2 }}>
+        <Avatar
+          src="/logo192.png"
+          alt="Logo"
+          sx={{ width: 56, height: 56, mr: 2 }}
+        />
+        <Typography variant="h4">Community Skill Dashboard</Typography>
+      </Box>
 
-      {/* Total Users Card */}
+      {/* Stats Cards */}
       <Grid container spacing={3} sx={{ mb: 2 }}>
         <Grid item xs={12} md={4}>
           <Card sx={{ display: "flex", alignItems: "center", p: 2 }}>
@@ -38,8 +50,22 @@ const Dashboard = () => {
             </Box>
           </Card>
         </Grid>
+
+        {/* Selected User Challenge Count */}
+        <Grid item xs={12} md={4}>
+          <Card sx={{ display: "flex", alignItems: "center", p: 2 }}>
+            <PersonIcon sx={{ fontSize: 40, color: "#f57c00", mr: 2 }} />
+            <Box>
+              <Typography variant="h6">Selected User Challenges</Typography>
+              <Typography variant="h5" fontWeight="bold">
+                {selectedUser ? getSelectedUserChallengeCount() : "N/A"}
+              </Typography>
+            </Box>
+          </Card>
+        </Grid>
       </Grid>
 
+      {/* Form + User List */}
       <Grid container spacing={3}>
         <Grid item xs={12} md={4}>
           <UserForm refresh={fetchUsers} />
@@ -49,6 +75,7 @@ const Dashboard = () => {
             users={users}
             refresh={fetchUsers}
             onSelect={(user) => setSelectedUser(user)}
+            selectedUser={selectedUser}
           />
           {selectedUser && <SkillProgress user={selectedUser} />}
         </Grid>

@@ -32,14 +32,34 @@ const UserList = ({ users, refresh, onSelect }) => {
         </TableHead>
         <TableBody>
           {users.map((u) => (
-            <TableRow key={u._id}>
+            <TableRow
+              key={u._id}
+              hover
+              onClick={() => onSelect(u)}
+              sx={{
+                cursor: "pointer",
+                "&:hover": {
+                  backgroundColor: "#e3f2fd", // Light blue highlight on hover
+                },
+              }}
+            >
               <TableCell>{u.username}</TableCell>
               <TableCell>{u.courses.join(", ")}</TableCell>
               <TableCell>
-                <IconButton onClick={() => onSelect(u)}>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onSelect(u);
+                  }}
+                >
                   <VisibilityIcon />
                 </IconButton>
-                <IconButton onClick={() => deleteUser(u._id)}>
+                <IconButton
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteUser(u._id);
+                  }}
+                >
                   <DeleteIcon color="error" />
                 </IconButton>
               </TableCell>
